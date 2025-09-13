@@ -9,9 +9,21 @@ export const Header = () => {
           Foody
         </span>
       </div>
-      <div className='flex items-center gap-4'>
-        <Button variant={'outline'}>Sign In</Button>
-        <Button variant={'secondary'}>Sign Up</Button>
+      <div className='text-md flex items-center gap-4'>
+        <Button
+          variant={'outline'}
+          size={'md'}
+          className='cursor-pointer text-neutral-200 hover:border-0 hover:bg-neutral-200/40 hover:text-black'
+        >
+          Sign In
+        </Button>
+        <Button
+          variant={'secondary'}
+          size={'md'}
+          className='cursor-pointer hover:bg-neutral-200/30 hover:text-white'
+        >
+          Sign Up
+        </Button>
       </div>
     </div>
   );
