@@ -121,12 +121,15 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 400;
   }
 }
 
 @layer components {
   .big-container {
     margin: 0 auto;
+
     @apply max-w-360 border;
   }
 }

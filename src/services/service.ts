@@ -1,21 +1,25 @@
 import { api } from './api';
 
-// const getTodoList = async () => {
-//   const r = await api.get('/todos');
-//   console.log('API response:', r.data.todos);
-//   return r.data;
-// };
-
-const getTodoList = async (todoParam: string = '') => {
+const GetService = async (queryPath: string = '') => {
   try {
-    const endpoint = todoParam.length === 0 ? '/todos' : `/todos/${todoParam}`;
-    const response = await api.get(endpoint);
-    console.log('API response:', response.data.todos);
+    const response = await api.get(queryPath);
+    console.log('GetService response:', response.data);
     return response.data;
   } catch (error) {
-    console.error('Failed to fetch todos:', error);
+    console.error('Failed to fetch GetService:', error);
     throw error;
   }
 };
 
-export { getTodoList };
+const PostService = async (queryPath: string = '', payload?: any) => {
+  try {
+    const r = await api.post(queryPath, payload);
+    // console.log('API response:', r.data);
+    return r;
+  } catch (error) {
+    // console.error('Failed to fetch todos:', error);
+    throw error;
+  }
+};
+
+export { GetService, PostService };

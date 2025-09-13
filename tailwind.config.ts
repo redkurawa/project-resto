@@ -13,6 +13,12 @@ module.exports = {
           yellow: '#FDB022',
         },
       },
+      fontFamily: {
+        nunito: ['"Nunito"', 'sans-serif'],
+      },
+      fontWeight: {
+        normal: '400',
+      },
     },
   },
   plugins: [],
