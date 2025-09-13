@@ -6,13 +6,13 @@ import Resto from './components/pages/resto';
 
 function App() {
   return (
-    <>
+    <div className='mx-auto max-w-[1440px] border'>
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<LoginPage />} />
         <Route path='/resto/:id' element={<Resto />} />
       </Routes>
-    </>
+    </div>
   );
 }
 

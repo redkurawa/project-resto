@@ -3,6 +3,7 @@ import type { Restaurant } from '@/types/resto';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router';
 import { RestoNameHeader } from '../resto-name-header';
+import { Header } from './header';
 
 export const Home = () => {
   const [resto, setResto] = useState<Restaurant[]>([]);
@@ -27,14 +28,27 @@ export const Home = () => {
 
   return (
     // useRenderObjectList(resto);
-    <div className='grid grid-cols-1 gap-5 md:grid-cols-3'>
-      {resto.map((data) => (
-        <Link key={data.id} to={`resto/${data.id}`}>
-          <div className='hover:border-accent-yellow flex cursor-pointer rounded-2xl shadow-md hover:border'>
-            <RestoNameHeader headers={data} home={true} />
-          </div>
-        </Link>
-      ))}
-    </div>
+    <>
+      <div
+        style={{
+          backgroundImage: `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url("/images/hero-burger.png")`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          width: '100%',
+          height: '827px',
+        }}
+      >
+        <Header />
+      </div>
+      <div className='sm-container grid grid-cols-1 gap-5 md:grid-cols-3'>
+        {resto.map((data) => (
+          <Link key={data.id} to={`resto/${data.id}`}>
+            <div className='hover:border-accent-yellow flex cursor-pointer rounded-2xl shadow-md hover:border'>
+              <RestoNameHeader headers={data} home={true} />
+            </div>
+          </Link>
+        ))}
+      </div>
+    </>
   );
 };

@@ -28,13 +28,13 @@ const LoginPage = () => {
 
   return (
     <div className='big-container mx-auto flex w-full flex-wrap'>
-      <div className='flex w-full basis-1/2 items-center justify-center'>
+      <div className='flex w-full items-center justify-center border border-red-200 lg:basis-1/2'>
         <img
           src='./images/login-burger.png'
-          className='basis-1/2 object-contain'
+          className='hidden basis-1/2 object-contain lg:block'
         />
       </div>
-      <div className='flex-center w-full basis-1/2'>
+      <div className='flex-center mx-auto min-h-screen w-full basis-1/2 lg:min-h-0'>
         <Tabs
           defaultValue='signIn'
           className='w-[400px] rounded-2xl border p-2'

@@ -127,10 +127,10 @@
 }
 
 @layer components {
-  .big-container {
+  .sm-container {
     margin: 0 auto;
 
-    @apply max-w-360 border;
+    @apply max-w-300 border;
   }
 }
 
