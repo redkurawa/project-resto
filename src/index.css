@@ -130,7 +130,7 @@
   .sm-container {
     margin: 0 auto;
 
-    @apply max-w-300 border;
+    @apply max-w-300 px-4 lg:px-0;
   }
 }
 

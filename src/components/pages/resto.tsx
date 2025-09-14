@@ -38,6 +38,7 @@ import { GetService } from '@/services/service';
 import HeroImageResto from '../resto-detail-images-layout';
 import { RestoNameHeader } from '../resto-name-header';
 import type { MenuItem } from '@/types/resto';
+import { Header } from '../resto-header';
 
 const Resto: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -54,7 +55,8 @@ const Resto: React.FC = () => {
   if (!detail) return <div className='p-4'>Loading...</div>;
 
   return (
-    <div className='mx-auto max-w-5xl'>
+    <div className='sm-container mx-auto'>
+      <Header />
       <HeroImageResto urls={detail.images} />
       <RestoNameHeader headers={detail} />
 

@@ -3,7 +3,8 @@ import type { Restaurant } from '@/types/resto';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router';
 import { RestoNameHeader } from '../resto-name-header';
-import { Header } from './header';
+import { Header } from '../resto-header';
+import { RestoNavbar } from '../resto-navbar';
 
 export const Home = () => {
   const [resto, setResto] = useState<Restaurant[]>([]);
@@ -40,10 +41,11 @@ export const Home = () => {
       >
         <Header />
       </div>
-      <div className='sm-container grid grid-cols-1 gap-5 md:grid-cols-3'>
+      <RestoNavbar />
+      <div className='sm-container grid grid-cols-1 gap-5 lg:grid-cols-3'>
         {resto.map((data) => (
           <Link key={data.id} to={`resto/${data.id}`}>
-            <div className='hover:border-accent-yellow flex cursor-pointer rounded-2xl shadow-md hover:border'>
+            <div className='hover:border-accent-yellow flex cursor-pointer rounded-2xl p-3 shadow-md hover:border'>
               <RestoNameHeader headers={data} home={true} />
             </div>
           </Link>
