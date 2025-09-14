@@ -79,7 +79,7 @@ const Resto: React.FC = () => {
               <img
                 src={menu.image}
                 alt=''
-                className='h-[285px] w-full rounded-t-2xl object-cover'
+                className='h-43 w-full rounded-t-2xl object-cover md:h-71'
               />
               <div className='p-4'>
                 <div className='text-[16px]'>{menu.foodName}</div>
