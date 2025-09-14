@@ -13,7 +13,7 @@ export const RestoNameHeader: React.FC<HeaderProps> = ({
   headers,
   home = false,
 }) => {
-  console.log({ headers });
+  // console.log({ headers });
   return (
     <div className='flex items-center gap-2'>
       <img

@@ -3,7 +3,7 @@ import { api } from './api';
 const GetService = async (queryPath: string = '') => {
   try {
     const response = await api.get(queryPath);
-    console.log('GetService response:', response.data);
+    // console.log('GetService response:', response.data);
     return response.data;
   } catch (error) {
     console.error('Failed to fetch GetService:', error);

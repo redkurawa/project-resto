@@ -32,7 +32,7 @@ export const Home = () => {
     getResto();
   }, []);
 
-  console.log({ resto });
+  // console.log({ resto });
 
   return (
     <>
