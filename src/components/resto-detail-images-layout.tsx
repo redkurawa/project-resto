@@ -12,7 +12,7 @@ const HeroImageResto: React.FC<HeroProps> = ({ urls }) => {
   console.log({ urls });
   return (
     <div className='mx-auto my-5 flex h-[260px] max-w-[1200px] flex-row gap-2 md:h-[470px]'>
-      <div className='h-full min-w-[450px] flex-1 overflow-hidden rounded-lg shadow-lg'>
+      <div className='h-full w-full flex-1 overflow-hidden rounded-lg shadow-lg md:min-w-[450px]'>
         <img
           src={urls[0]}
           alt={urls[0]}
