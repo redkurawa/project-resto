@@ -31,18 +31,16 @@ export const Home = () => {
   }, []);
 
   console.log({ resto });
-  // if (!resto) return <div className='p-4 text-black'>Loading...</div>;
-  // if (loading) return <div className='p-4 text-black'>Loading...</div>;
 
   return (
     <>
       <div
+        className='h-[648px] md:h-[827px]'
         style={{
           backgroundImage: `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url("/images/hero-burger.png")`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           width: '100%',
-          height: '827px',
         }}
       >
         <Header />
@@ -50,14 +48,8 @@ export const Home = () => {
 
       <RestoNavbar />
       <Loading loading={loading} />
-      {/* <Dialog open={loading}>
-        <DialogContent className='text-center'>
-          <div className='text-lg font-semibold'>Loading restoran...</div>
-        </DialogContent>
-      </Dialog> */}
       <div className='sm-container grid grid-cols-1 gap-5 lg:grid-cols-3'>
         {loading ? (
-          // <div className='p-4 text-black'>Loading...</div>
           <Loading />
         ) : (
           <>
