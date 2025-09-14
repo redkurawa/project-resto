@@ -1,37 +1,3 @@
-// import { useRenderObjectList } from '@/hook/useRenderObjectList';
-// import { GetService } from '@/services/service';
-// import React, { useEffect, useState } from 'react';
-// import { useParams } from 'react-router';
-
-// const Resto: React.FC = () => {
-//   const { id } = useParams<{ id: string }>();
-//   const [detail, setDetail] = useState<any>(null);
-//   useEffect(() => {
-//     const restoId = async () => {
-//       const r = await GetService(`resto/${id}`);
-//       setDetail(r.data);
-//       console.log('Fetched detail:', detail);
-//     };
-//     restoId();
-//   }, []);
-
-//   useEffect(() => {
-//     if (detail) {
-//       console.log('Updated detail:', detail);
-//     }
-//   }, [detail]);
-
-//   return (
-//     <>
-//       <div className='flex'>
-
-//       </div>
-//     </>
-//   );
-// };
-
-// export default Resto;
-
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { GetService } from '@/services/service';
@@ -40,8 +6,9 @@ import { RestoNameHeader } from '../resto-name-header';
 import type { MenuItem } from '@/types/resto';
 import { Header } from '../resto-header';
 import { RestoFooter } from '../resto-footer';
-import { formatRupiah } from '@/utils/formatRp';
+import { formatRupiah } from '@/utils/format-rp';
 import { Loading } from '../loading';
+import { extractFileName } from '@/utils/extract-file-name';
 
 const Resto: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -78,7 +45,7 @@ const Resto: React.FC = () => {
             <div key={menu.id} className='shadow-all rounded-t-2xl'>
               <img
                 src={menu.image}
-                alt=''
+                alt={extractFileName(menu.image)}
                 className='h-43 w-full rounded-t-2xl object-cover md:h-71'
               />
               <div className='p-4'>
