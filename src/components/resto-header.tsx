@@ -9,7 +9,7 @@ export const Header = () => {
           Foody
         </span>
       </div>
-      <div className='text-md flex items-center gap-4'>
+      <div className='text-md hidden items-center gap-4 md:flex'>
         <Button
           variant={'outline'}
           size={'md'}
