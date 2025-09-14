@@ -2,7 +2,7 @@
 import LoginPage from '@/components/pages/login';
 import { Route, Routes } from 'react-router';
 import { Home } from './components/pages/home';
-import Resto from './components/pages/resto';
+import Resto from './components/pages/detail';
 
 function App() {
   return (

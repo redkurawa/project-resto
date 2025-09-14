@@ -39,6 +39,7 @@ import HeroImageResto from '../resto-detail-images-layout';
 import { RestoNameHeader } from '../resto-name-header';
 import type { MenuItem } from '@/types/resto';
 import { Header } from '../resto-header';
+import { RestoFooter } from '../resto-footer';
 
 const Resto: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -55,23 +56,26 @@ const Resto: React.FC = () => {
   if (!detail) return <div className='p-4'>Loading...</div>;
 
   return (
-    <div className='sm-container mx-auto'>
-      <Header />
-      <HeroImageResto urls={detail.images} />
-      <RestoNameHeader headers={detail} />
+    <>
+      <div className='sm-container mx-auto'>
+        <Header />
+        <HeroImageResto urls={detail.images} />
+        <RestoNameHeader headers={detail} />
 
-      <div className='mb-6 grid grid-cols-2 gap-4 text-sm text-gray-700'>
-        {detail.menus.map((menu: MenuItem) => (
-          <div key={menu.id}>
-            <div>{menu.id}</div>
-            <div>{menu.foodName}</div>
-            <div>{menu.price}</div>
-            <div>{menu.type}</div>
-            <div>{menu.image}</div>
-          </div>
-        ))}
+        <div className='mb-6 grid grid-cols-2 gap-4 text-sm text-gray-700'>
+          {detail.menus.map((menu: MenuItem) => (
+            <div key={menu.id}>
+              <div>{menu.id}</div>
+              <div>{menu.foodName}</div>
+              <div>{menu.price}</div>
+              <div>{menu.type}</div>
+              <div>{menu.image}</div>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+      <RestoFooter />
+    </>
   );
 };
 

@@ -147,4 +147,8 @@
   .flex-start {
     @apply flex items-center justify-start;
   }
+
+  .ball {
+    @apply flex items-center justify-center rounded-full;
+  }
 }

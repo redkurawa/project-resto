@@ -5,6 +5,7 @@ import { Link } from 'react-router';
 import { RestoNameHeader } from '../resto-name-header';
 import { Header } from '../resto-header';
 import { RestoNavbar } from '../resto-navbar';
+import { RestoFooter } from '../resto-footer';
 
 export const Home = () => {
   const [resto, setResto] = useState<Restaurant[]>([]);
@@ -51,6 +52,7 @@ export const Home = () => {
           </Link>
         ))}
       </div>
+      <RestoFooter />
     </>
   );
 };
