@@ -1,27 +1,66 @@
 import { Link } from 'react-router';
 import { Button } from './ui/button';
 import { useAppSelector } from '@/redux/hooks';
+import { useEffect, useState } from 'react';
+import CartIcon from './card-icon';
 
-export const Header = () => {
+type HomeProps = {
+  home?: boolean;
+};
+
+type Props = {
+  isScroll?: boolean;
+};
+
+export const Header = ({ home = false }: HomeProps) => {
+  const [isScroll, setIsScroll] = useState(false);
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScroll(window.scrollY > 0);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return home ? (
+    <div
+      className={`fixed top-0 left-0 z-10 h-20 w-full transition-all duration-300 ${isScroll ? 'bg-white/60' : 'bg-transparent'}`}
+    >
+      <div className='sm-container flex justify-between pt-4'>
+        <HeaderContent isScroll={isScroll} />
+      </div>
+    </div>
+  ) : (
+    <div
+      className={`sm-container sticky top-0 left-0 z-10 flex h-20 w-full justify-between transition-all duration-300 ${isScroll ? 'bg-white/60' : 'bg-transparent'}`}
+    >
+      <HeaderContent isScroll={isScroll} />
+    </div>
+  );
+};
+
+const HeaderContent = ({ isScroll = false }: Props) => {
   const { token, user } = useAppSelector((state) => state.auth);
-
   return (
-    // <div className='sm-container top absolute flex h-20 justify-between'>
-    <div className='sm-container sticky top-0 left-0 z-10 flex h-20 w-full justify-between'>
+    <>
       <div className='flex items-center'>
         <img src='/icons/logo.svg' alt='logo' />
-        <span className='ml-2 text-[32px] font-extrabold text-white'>
+        <span
+          className={`ml-2 text-[32px] font-extrabold ${isScroll ? 'text-black' : 'text-white'}`}
+        >
           Foody
         </span>
       </div>
       {token ? (
-        <div className='flex items-center gap-6 text-white'>
-          <img src='/icons/cart.svg' alt='card' />
+        <div
+          className={`flex items-center gap-6 ${isScroll ? 'text-black' : 'text-white'}`}
+        >
+          <CartIcon />
           <p>{user?.name}</p>
         </div>
       ) : (
         <>
-          <div className='text-white'>tidak ada isi</div>
           <div className='text-md hidden items-center gap-4 md:flex'>
             <Button
               variant={'outline'}
@@ -40,7 +79,6 @@ export const Header = () => {
           </div>
         </>
       )}
-      <div className={`${token ? 'hidden' : 'block'}`}></div>
-    </div>
+    </>
   );
 };

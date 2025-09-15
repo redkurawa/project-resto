@@ -46,7 +46,7 @@ export const Home = () => {
           width: '100%',
         }}
       >
-        <Header />
+        <Header home={true} />
         <div className='flex h-full flex-col justify-center p-5.5'>
           <div className='mx-auto w-full max-w-178 text-center text-white'>
             <h1 className='text-4xl font-extrabold md:text-5xl'>
