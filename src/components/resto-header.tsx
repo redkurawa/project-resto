@@ -10,6 +10,7 @@ type HomeProps = {
 
 type Props = {
   isScroll?: boolean;
+  home?: boolean;
 };
 
 export const Header = ({ home = false }: HomeProps) => {
@@ -28,33 +29,33 @@ export const Header = ({ home = false }: HomeProps) => {
       className={`fixed top-0 left-0 z-10 h-20 w-full transition-all duration-300 ${isScroll ? 'bg-white/60' : 'bg-transparent'}`}
     >
       <div className='sm-container flex justify-between pt-4'>
-        <HeaderContent isScroll={isScroll} />
+        <HeaderContent isScroll={isScroll} home={home} />
       </div>
     </div>
   ) : (
     <div
       className={`sm-container sticky top-0 left-0 z-10 flex h-20 w-full justify-between transition-all duration-300 ${isScroll ? 'bg-white/60' : 'bg-transparent'}`}
     >
-      <HeaderContent isScroll={isScroll} />
+      <HeaderContent isScroll={isScroll} home={home} />
     </div>
   );
 };
 
-const HeaderContent = ({ isScroll = false }: Props) => {
+const HeaderContent = ({ isScroll = false, home = false }: Props) => {
   const { token, user } = useAppSelector((state) => state.auth);
   return (
     <>
       <div className='flex items-center'>
         <img src='/icons/logo.svg' alt='logo' />
         <span
-          className={`ml-2 text-[32px] font-extrabold ${isScroll ? 'text-black' : 'text-white'}`}
+          className={`ml-2 text-[32px] font-extrabold ${home ? (isScroll ? 'text-black' : 'text-white') : 'text-black'}`}
         >
           Foody
         </span>
       </div>
       {token ? (
         <div
-          className={`flex items-center gap-6 ${isScroll ? 'text-black' : 'text-white'}`}
+          className={`flex items-center gap-6 ${home ? (isScroll ? 'text-black' : 'text-white') : 'text-black'}`}
         >
           <CartIcon />
           <p>{user?.name}</p>
