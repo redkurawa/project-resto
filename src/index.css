@@ -151,8 +151,4 @@
   .ball {
     @apply flex items-center justify-center rounded-full;
   }
-
-  /* .shadow-all {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-} */
 }

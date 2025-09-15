@@ -1,4 +1,4 @@
-import { setMenus } from '@/redux/menuSlice';
+import { setMenus } from '@/redux/menu-slice';
 import type { RootState } from '@/redux/store';
 import { GetService } from '@/services/service';
 import { menuTypes, type MenuItem } from '@/types/resto';

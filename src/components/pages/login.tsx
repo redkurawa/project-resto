@@ -16,8 +16,8 @@ const LoginPage = () => {
     try {
       const payload = { email, password };
       const r = await PostService('auth/login', payload);
-      setStatus(`success..: ${JSON.stringify(r)}`);
-      console.log(r);
+      setStatus(`success..: ${JSON.stringify(r.data)}`);
+      console.log(r.data);
       // const token = r.data.token;
       // console.log({ token });
       // localStorage.setItem('authToken', token);
@@ -40,22 +40,24 @@ const LoginPage = () => {
           className='w-[400px] rounded-2xl border p-2'
         >
           <TabsList>
-            <TabsTrigger value='signIn'>Account</TabsTrigger>
-            <TabsTrigger value='signUp'>Password</TabsTrigger>
+            <TabsTrigger value='signIn'>Sign In</TabsTrigger>
+            <TabsTrigger value='signUp'>Sign Up</TabsTrigger>
           </TabsList>
-          <TabsContent value='signIn' className='flex flex-col gap-2'>
+          <TabsContent value='signIn'>
             <form onSubmit={handleSubmit}>
               <Input
                 id='email'
                 placeholder='Email'
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                className='my-2'
               />
               <Input
                 id='password'
                 placeholder='Password'
                 value={password}
                 onChange={(e) => setPasswd(e.target.value)}
+                className='my-2'
               />
               <Button className='w-full' type='submit'>
                 Login

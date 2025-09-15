@@ -9,7 +9,7 @@ import { RestoFooter } from '../resto-footer';
 import { formatRupiah } from '@/utils/format-rp';
 import { Loading } from '../loading';
 import { extractFileName } from '@/utils/extract-file-name';
-import { setMenus } from '@/redux/menuSlice';
+import { setMenus } from '@/redux/menu-slice';
 import { useDispatch, useSelector } from 'react-redux';
 import type { RootState } from '@/redux/store';
 
