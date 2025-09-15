@@ -9,6 +9,7 @@ import { RestoNameHeader } from '../resto-name-header';
 import { RestoNavbar } from '../resto-navbar';
 import { Input } from '../ui/input';
 import { Search } from 'lucide-react';
+import { Button } from '../ui/button';
 
 export const Home = () => {
   const [resto, setResto] = useState<Restaurant[]>([]);
@@ -69,7 +70,7 @@ export const Home = () => {
 
       <RestoNavbar />
       <Loading loading={loading} />
-      <div className='sm-container grid grid-cols-1 gap-5 lg:grid-cols-3'>
+      <div className='sm-container mb-8 grid grid-cols-1 gap-5 lg:grid-cols-3'>
         {loading ? (
           <Loading />
         ) : (
@@ -84,6 +85,13 @@ export const Home = () => {
           </>
         )}
       </div>
+      <Button
+        variant={'outline'}
+        className='mx-auto mb-10 block rounded-full px-11 py-1 text-sm md:mb-25 md:px-10 md:py-2 md:text-[16px]'
+      >
+        Load More
+      </Button>
+
       <RestoFooter />
     </>
   );
