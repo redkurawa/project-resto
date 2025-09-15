@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
-import { GetService } from '@/services/service';
-import HeroImageResto from '../resto-detail-images-layout';
-import { RestoNameHeader } from '../resto-name-header';
-import { menuTypes, type MenuItem } from '@/types/resto';
-import { Header } from '../resto-header';
-import { RestoFooter } from '../resto-footer';
-import { formatRupiah } from '@/utils/format-rp';
-import { Loading } from '../loading';
-import { extractFileName } from '@/utils/extract-file-name';
 import { setMenus } from '@/redux/menuSlice';
-import { useDispatch, useSelector } from 'react-redux';
 import type { RootState } from '@/redux/store';
+import { GetService } from '@/services/service';
+import { menuTypes, type MenuItem } from '@/types/resto';
+import { extractFileName } from '@/utils/extract-file-name';
+import { formatRupiah } from '@/utils/format-rp';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router';
+import { Loading } from '../loading';
+import HeroImageResto from '../resto-detail-images-layout';
+import { RestoFooter } from '../resto-footer';
+import { Header } from '../resto-header';
+import { RestoNameHeader } from '../resto-name-header';
 
 const Resto: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -21,10 +21,7 @@ const Resto: React.FC = () => {
 
   const updatedMenuType = ['All', ...menuTypes];
   const dispatch = useDispatch();
-  // const menus = useSelector((state: RootState) => state.menus.items);
-  let menus = useSelector((state: RootState) =>
-    state.menus.items.filter((menu) => menu.type === 'side')
-  );
+  const allMenus = useSelector((state: RootState) => state.menus.items);
 
   useEffect(() => {
     const fetchDetail = async () => {
@@ -42,16 +39,16 @@ const Resto: React.FC = () => {
   }, [id]);
 
   if (!detail) return <Loading loading={loading} />;
-  console.log({ detail });
 
   const handleClick = (i: number) => {
     setActiveMenu(i);
-    // console.log(`tombol${i + 1} diklik`);
-    console.log(`tombol ${menuTypes[i]} di klik`);
-    menus = useSelector((state: RootState) =>
-      state.menus.items.filter((menu) => menu.type === menuTypes[i])
-    );
+    console.log(`tombol ${updatedMenuType[i]} di klik`);
   };
+
+  const filteredMenus =
+    activeMenu === 0
+      ? allMenus
+      : allMenus.filter((menu) => menu.type === menuTypes[activeMenu - 1]);
 
   return (
     <>
@@ -61,13 +58,6 @@ const Resto: React.FC = () => {
         <div className='border-b pb-8'>
           <RestoNameHeader headers={detail} />
         </div>
-        {/* pilihan tipe menu */}
-        {/* <div className='mt-4 md:mt-8'>
-          <h1 className='text-2xl font-extrabold md:text-4xl'>Menu</h1>
-          {menuTypes.map((tipe) => (
-            <div>{tipe}</div>
-          ))}
-        </div> */}
 
         <div className='mt-5 flex gap-4 text-sm md:text-[16x]'>
           {updatedMenuType.map((menu, i) => (
@@ -85,10 +75,8 @@ const Resto: React.FC = () => {
           ))}
         </div>
 
-        {/* end pilih tipe menu */}
         <div className='mt-8 mb-6 grid grid-cols-2 gap-4 text-sm text-gray-700 md:grid-cols-4'>
-          {/* {detail.menus.map((menu: MenuItem) => ( */}
-          {menus.map((menu: MenuItem) => (
+          {filteredMenus.map((menu: MenuItem) => (
             <div key={menu.id} className='shadow-all rounded-t-2xl'>
               <img
                 src={menu.image}
@@ -101,8 +89,6 @@ const Resto: React.FC = () => {
                   {formatRupiah(menu.price)}
                 </div>
               </div>
-              {/* <div>{menu.id}</div> */}
-              {/* <div>{menu.type}</div> */}
             </div>
           ))}
         </div>

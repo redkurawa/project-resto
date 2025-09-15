@@ -2,7 +2,9 @@
 import LoginPage from '@/components/pages/login';
 import { Route, Routes } from 'react-router';
 import { Home } from './components/pages/home';
-import Resto from './components/pages/detail';
+// import Resto from './components/pages/detail';
+import ToggleDivs from './components/pages/tes';
+import Resto from './components/pages/detail2';
 
 function App() {
   return (
@@ -10,6 +12,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<LoginPage />} />
+        <Route path='/tes' element={<ToggleDivs />} />
         <Route path='/resto/:id' element={<Resto />} />
       </Routes>
     </div>
