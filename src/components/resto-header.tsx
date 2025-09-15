@@ -1,3 +1,4 @@
+import { Link } from 'react-router';
 import { Button } from './ui/button';
 
 export const Header = () => {
@@ -16,7 +17,7 @@ export const Header = () => {
           size={'md'}
           className='cursor-pointer text-neutral-200 hover:border-0 hover:bg-neutral-200/40 hover:text-black'
         >
-          Sign In
+          <Link to='/login'>Sign In</Link>
         </Button>
         <Button
           variant={'secondary'}
