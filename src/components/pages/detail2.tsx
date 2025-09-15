@@ -59,11 +59,11 @@ const Resto: React.FC = () => {
           <RestoNameHeader headers={detail} />
         </div>
 
-        <div className='mt-5 flex gap-4 text-sm md:text-[16x]'>
+        <div className='mt-5 flex flex-wrap gap-2 text-sm sm:gap-4 sm:text-[16x]'>
           {updatedMenuType.map((menu, i) => (
             <div
               key={i}
-              className={`cursor-pointer rounded-2xl border px-4 py-1 ${
+              className={`cursor-pointer rounded-2xl border px-2 py-1 sm:px-4 ${
                 activeMenu === i
                   ? 'text-primary-100 border-primary-100 bg-[#FFECEC] font-bold'
                   : 'bg-white font-semibold text-black'
