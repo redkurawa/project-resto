@@ -13,7 +13,7 @@ import Login4 from './components/pages/login4';
 
 function App() {
   return (
-    <div className='mx-auto max-w-[1440px] border'>
+    <div className='mx-auto max-w-[1440px]'>
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<LoginPage />} />
