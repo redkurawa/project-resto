@@ -12,6 +12,8 @@ import HeroImageResto from '../resto-detail-images-layout';
 import { RestoFooter } from '../resto-footer';
 import { Header } from '../resto-header';
 import { RestoNameHeader } from '../resto-name-header';
+// import App3 from './tes3';
+import RestoReview from '../resto-review';
 
 const Resto: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -75,7 +77,7 @@ const Resto: React.FC = () => {
           ))}
         </div>
 
-        <div className='mt-8 mb-6 grid grid-cols-2 gap-4 text-sm text-gray-700 md:grid-cols-4'>
+        <div className='mt-8 mb-28 grid grid-cols-2 gap-4 text-sm text-gray-700 md:grid-cols-4'>
           {filteredMenus.map((menu: MenuItem) => (
             <div key={menu.id} className='shadow-all rounded-t-2xl'>
               <img
@@ -92,6 +94,8 @@ const Resto: React.FC = () => {
             </div>
           ))}
         </div>
+        <RestoReview id={id} />
+        {/* {id ? <RestoReview id={id} /> : <>Review tidak ada</>} */}
       </div>
       <RestoFooter />
     </>
