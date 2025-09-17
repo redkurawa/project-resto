@@ -3,6 +3,7 @@ import { Button } from './ui/button';
 import { useAppSelector } from '@/redux/hooks';
 import { useEffect, useState } from 'react';
 import CartIcon from './card-icon';
+import { DropDownUserMenu } from './dropdown-profile';
 
 type HomeProps = {
   home?: boolean;
@@ -50,15 +51,19 @@ const HeaderContent = ({ isScroll = false, home = false }: Props) => {
         <span
           className={`ml-2 text-[32px] font-extrabold ${home ? (isScroll ? 'text-black' : 'text-white') : 'text-black'}`}
         >
-          Foody
+          <Link to='/'>Foody</Link>
         </span>
       </div>
       {token ? (
         <div
           className={`flex items-center gap-6 ${home ? (isScroll ? 'text-black' : 'text-white') : 'text-black'}`}
         >
-          <CartIcon />
-          <p>{user?.name}</p>
+          <Link to='/mycart'>
+            <CartIcon />
+          </Link>
+          <div onClick={DropDownUserMenu} className='cursor-pointer'>
+            {user?.name}
+          </div>
         </div>
       ) : (
         <>

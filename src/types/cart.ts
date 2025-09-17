@@ -7,3 +7,9 @@ export interface Cart {
   menuPrice: number;
   menuQty: number;
 }
+
+export type CartItem = {
+  userId: number;
+  menuId: number;
+  quantity: number;
+};

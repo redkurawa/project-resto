@@ -22,7 +22,7 @@ const RestoReview: React.FC<RestoReviewProps> = ({ id }) => {
       try {
         if (token) {
           const response = await GetService(`review/restaurant/${id}`, token);
-          console.log(response.data);
+          // console.log(response.data);
           if (response.data) {
             setData(response.data as RestaurantData);
           } else {

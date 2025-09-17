@@ -4,7 +4,7 @@ import { GetService } from '@/services/service';
 import { menuTypes, type MenuItem } from '@/types/resto';
 import { extractFileName } from '@/utils/extract-file-name';
 import { formatRupiah } from '@/utils/format-rp';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { Loading } from '../loading';
@@ -13,6 +13,7 @@ import { RestoFooter } from '../resto-footer';
 import { Header } from '../resto-header';
 import { RestoNameHeader } from '../resto-name-header';
 // import App3 from './tes3';
+import AddCart from '../menu-add-cart2';
 import RestoReview from '../resto-review';
 
 const Resto: React.FC = () => {
@@ -24,7 +25,7 @@ const Resto: React.FC = () => {
   const updatedMenuType = ['All', ...menuTypes];
   const dispatch = useDispatch();
   const allMenus = useSelector((state: RootState) => state.menus.items);
-
+  const { user } = useSelector((state: RootState) => state.auth);
   useEffect(() => {
     const fetchDetail = async () => {
       try {
@@ -85,11 +86,17 @@ const Resto: React.FC = () => {
                 alt={extractFileName(menu.image)}
                 className='h-43 w-full rounded-t-2xl object-cover md:h-71'
               />
-              <div className='p-4'>
-                <div className='text-[16px]'>{menu.foodName}</div>
-                <div className='text-lg font-extrabold'>
-                  {formatRupiah(menu.price)}
+              <div className='grid w-full grid-cols-1 p-4 md:grid-cols-[1fr_auto]'>
+                <div>
+                  <div className='text-[16px]'>{menu.foodName}</div>
+                  <div className='text-lg font-extrabold'>
+                    {formatRupiah(menu.price)}
+                  </div>
                 </div>
+                {/* <Button className='w-fit rounded-full px-6 py-0.5 text-sm font-bold'>
+                  Add
+                </Button> */}
+                {user ? <AddCart menuId={menu.id} /> : <></>}
               </div>
             </div>
           ))}

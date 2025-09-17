@@ -1,15 +1,27 @@
-// components/ReviewDate.tsx
-import React from 'react';
-import dayjs from 'dayjs';
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { DropDownUserMenu, DropDownItemDetails } from '../dropdown-profile';
 
-interface ReviewDateProps {
-  createdAt: string; // ISO date string, misalnya "2025-09-16T12:34:56Z"
-}
+export const TesLagi = () => {
+  return (
+    <div>
+      {/* First Dropdown: User Menu */}
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <div className='m-10 cursor-pointer'>User Menu</div>
+        </DropdownMenuTrigger>
+        <DropDownUserMenu />
+      </DropdownMenu>
 
-const ReviewDate: React.FC<ReviewDateProps> = ({ createdAt }) => {
-  const formattedDate = dayjs(createdAt).format('DD MMMM YYYY'); // contoh: "16 September 2025"
-
-  return <div>{formattedDate}</div>;
+      {/* Second Dropdown: Item Details */}
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <div className='m-10 cursor-pointer'>Check Detail Barang</div>
+        </DropdownMenuTrigger>
+        <DropDownItemDetails />
+      </DropdownMenu>
+    </div>
+  );
 };
-
-export default ReviewDate;

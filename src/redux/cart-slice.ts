@@ -1,41 +1,85 @@
-import type { Cart } from '@/types/cart';
+// features/cart/cartSlice.ts
+import type { CartItem } from '@/types/cart';
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
 interface CartState {
-  carts: Cart[];
+  items: CartItem[];
 }
 
 const initialState: CartState = {
-  carts: [],
+  items: [],
 };
 
 const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    setCarts(state, action: PayloadAction<Cart[]>) {
-      state.carts = action.payload;
-    },
-    addCarts(state, action: PayloadAction<Cart>) {
-      state.carts.push(action.payload);
-    },
-    removeCartById(state, action: PayloadAction<number>) {
-      state.carts = state.carts.filter((cart) => cart.id !== action.payload);
-    },
-    clearCart(state) {
-      state.carts = [];
-    },
-    updateCart(state, action: PayloadAction<Cart>) {
-      const index = state.carts.findIndex(
-        (cart) => cart.id === action.payload.id
+    addToCart: (
+      state,
+      action: PayloadAction<{
+        userId: number;
+        menuId: number;
+        quantity?: number;
+      }>
+    ) => {
+      const { userId, menuId, quantity = 1 } = action.payload;
+      const existing = state.items.find(
+        (item) => item.userId === userId && item.menuId === menuId
       );
-      if (index !== -1) {
-        state.carts[index] = action.payload;
+      if (existing) {
+        existing.quantity += quantity;
+      } else {
+        state.items.push({ userId, menuId, quantity });
+      }
+    },
+    removeFromCart: (
+      state,
+      action: PayloadAction<{ userId: number; menuId: number }>
+    ) => {
+      state.items = state.items.filter(
+        (item) =>
+          !(
+            item.userId === action.payload.userId &&
+            item.menuId === action.payload.menuId
+          )
+      );
+    },
+    incrementQuantity: (
+      state,
+      action: PayloadAction<{ userId: number; menuId: number }>
+    ) => {
+      const { userId, menuId } = action.payload;
+      const existing = state.items.find(
+        (item) => item.userId === userId && item.menuId === menuId
+      );
+      if (existing) {
+        existing.quantity += 1;
+      }
+    },
+    // Reducer untuk mengurangi kuantitas
+    decrementQuantity: (
+      state,
+      action: PayloadAction<{ userId: number; menuId: number }>
+    ) => {
+      const { userId, menuId } = action.payload;
+      const existing = state.items.find(
+        (item) => item.userId === userId && item.menuId === menuId
+      );
+      if (existing) {
+        existing.quantity -= 1;
+        // Hapus item dari keranjang jika kuantitasnya menjadi 0 atau kurang
+        if (existing.quantity <= 0) {
+          state.items = state.items.filter((item) => item.menuId !== menuId);
+        }
       }
     },
   },
 });
 
-export const { setCarts, addCarts, removeCartById, clearCart, updateCart } =
-  cartSlice.actions;
+export const {
+  addToCart,
+  removeFromCart,
+  incrementQuantity,
+  decrementQuantity,
+} = cartSlice.actions;
 export default cartSlice.reducer;

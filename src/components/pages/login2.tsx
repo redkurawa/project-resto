@@ -28,7 +28,7 @@ export const Login2 = () => {
   };
 
   useEffect(() => {
-    console.log('user:', user); // Tambahkan ini
+    // console.log('user:', user); // Tambahkan ini
     if (user) {
       navigate('/');
     }

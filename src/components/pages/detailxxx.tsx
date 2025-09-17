@@ -13,7 +13,7 @@ import { setMenus } from '@/redux/menu-slice';
 import { useDispatch, useSelector } from 'react-redux';
 import type { RootState } from '@/redux/store';
 
-const Resto: React.FC = () => {
+const RestoTidakDiPakai: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [detail, setDetail] = useState<any>(null);
   const [loading, setLoading] = useState(true);
@@ -112,4 +112,4 @@ const Resto: React.FC = () => {
   );
 };
 
-export default Resto;
+export default RestoTidakDiPakai;

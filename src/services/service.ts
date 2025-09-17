@@ -6,7 +6,7 @@ const GetService = async (queryPath: string = '', token?: string) => {
     const headers = token ? { Authorization: `Bearer ${token}` } : {};
     // const response = await api.get(queryPath);
     const r = await api.get(queryPath, { headers });
-    console.log('ser.ts :', { r });
+    // console.log('ser.ts :', { r });
     // console.log('GetService response:', response.data);
     return r.data;
   } catch (error) {
