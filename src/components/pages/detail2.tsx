@@ -1,7 +1,7 @@
 import { setMenus } from '@/redux/menu-slice';
 import type { RootState } from '@/redux/store';
 import { GetService } from '@/services/service';
-import { menuTypes, type MenuItem } from '@/types/resto';
+import { menuTypes, type MenuItem } from '@/types/menu';
 import { extractFileName } from '@/utils/extract-file-name';
 import { formatRupiah } from '@/utils/format-rp';
 import { useEffect, useState } from 'react';
@@ -12,8 +12,7 @@ import HeroImageResto from '../resto-detail-images-layout';
 import { RestoFooter } from '../resto-footer';
 import { Header } from '../resto-header';
 import { RestoNameHeader } from '../resto-name-header';
-// import App3 from './tes3';
-import AddCart from '../menu-add-cart2';
+import AddCart from '../menu-add-cart';
 import RestoReview from '../resto-review';
 
 const Resto: React.FC = () => {
@@ -45,7 +44,7 @@ const Resto: React.FC = () => {
 
   const handleClick = (i: number) => {
     setActiveMenu(i);
-    console.log(`tombol ${updatedMenuType[i]} di klik`);
+    // console.log(`tombol ${updatedMenuType[i]} di klik`);
   };
 
   const filteredMenus =
@@ -93,9 +92,6 @@ const Resto: React.FC = () => {
                     {formatRupiah(menu.price)}
                   </div>
                 </div>
-                {/* <Button className='w-fit rounded-full px-6 py-0.5 text-sm font-bold'>
-                  Add
-                </Button> */}
                 {user ? <AddCart menuId={menu.id} /> : <></>}
               </div>
             </div>

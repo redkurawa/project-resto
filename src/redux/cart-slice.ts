@@ -20,6 +20,7 @@ const cartSlice = createSlice({
         userId: number;
         menuId: number;
         quantity?: number;
+        // restoName: string;
       }>
     ) => {
       const { userId, menuId, quantity = 1 } = action.payload;

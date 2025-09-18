@@ -1,39 +1,49 @@
-import { GetService } from '@/services/service';
-import type { Restaurant } from '@/types/resto';
+import { useAppSelector } from '@/redux/hooks';
+import { getResto } from '@/redux/resto-slice';
+import type { AppDispatch, RootState } from '@/redux/store';
+import { Search } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router';
 import { Loading } from '../loading';
 import { RestoFooter } from '../resto-footer';
 import { Header } from '../resto-header';
 import { RestoNameHeader } from '../resto-name-header';
 import { RestoNavbar } from '../resto-navbar';
-import { Input } from '../ui/input';
-import { Search } from 'lucide-react';
 import { Button } from '../ui/button';
+import { Input } from '../ui/input';
 
-export const Home = () => {
-  const [resto, setResto] = useState<Restaurant[]>([]);
-  const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
+export const Home2 = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const { data, loading, error } = useAppSelector(
+    (state: RootState) => state.resto
+  );
+  const [currPage, setCurrPage] = useState(1);
+  const perPage = 12;
 
   useEffect(() => {
-    const getResto = async () => {
-      try {
-        const r = await GetService('resto');
-        const data: Restaurant[] = r.data.restaurants;
-        setResto(data);
-        // console.log({ data });
-      } catch (err) {
-        setError(`gagal load resto :${err}`);
-        console.log(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    getResto();
-  }, []);
+    dispatch(getResto());
+  }, [dispatch]);
 
-  // console.log({ resto });
+  const hndLoadMore = () => {
+    setCurrPage((prevPage) => prevPage + 1);
+  };
+
+  const displayed = data?.restaurants.slice(0, currPage * perPage) || [];
+
+  const showMoreBtn = displayed.length < (data?.restaurants.length || 0);
+
+  if (loading === 'pending' && displayed.length === 0) {
+    return (
+      <div>
+        <Loading loading={true} />
+      </div>
+    );
+  }
+
+  if (loading === 'failed') {
+    return <div>Error:{error}</div>;
+  }
 
   return (
     <>
@@ -69,28 +79,27 @@ export const Home = () => {
       </div>
 
       <RestoNavbar />
-      <Loading loading={loading} />
       <div className='sm-container mb-8 grid grid-cols-1 gap-5 lg:grid-cols-3'>
-        {loading ? (
-          <Loading />
-        ) : (
-          <>
-            {resto.map((data) => (
-              <Link key={data.id} to={`resto/${data.id}`}>
-                <div className='hover:border-accent-yellow/50 shadow-all flex cursor-pointer rounded-2xl p-3 hover:border'>
-                  <RestoNameHeader headers={data} home={true} />
-                </div>
-              </Link>
-            ))}
-          </>
-        )}
+        <>
+          {displayed.map((d) => (
+            <Link key={d.id} to={`resto/${d.id}`}>
+              <div className='hover:border-accent-yellow/50 shadow-all flex cursor-pointer rounded-2xl p-3 hover:border'>
+                <RestoNameHeader headers={d} home={true} />
+              </div>
+            </Link>
+          ))}
+        </>
       </div>
-      <Button
-        variant={'outline'}
-        className='mx-auto mb-10 block rounded-full px-11 py-1 text-sm md:mb-25 md:px-10 md:py-2 md:text-[16px]'
-      >
-        Load More
-      </Button>
+      {/* {loading === 'pending' && displayed.length > 0 && <div>Loading more</div>} */}
+      {showMoreBtn && (
+        <Button
+          variant={'outline'}
+          className='mx-auto mb-10 block rounded-full px-11 py-1 text-sm md:mb-25 md:px-10 md:py-2 md:text-[16px]'
+          onClick={hndLoadMore}
+        >
+          Load More
+        </Button>
+      )}
 
       <RestoFooter />
     </>

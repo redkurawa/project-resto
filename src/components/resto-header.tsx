@@ -80,7 +80,7 @@ const HeaderContent = ({ isScroll = false, home = false }: Props) => {
               size={'md'}
               className='cursor-pointer hover:bg-neutral-200/30 hover:text-white'
             >
-              Sign Up
+              <Link to='/get'>Sign Up</Link>
             </Button>
           </div>
         </>

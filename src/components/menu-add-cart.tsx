@@ -2,7 +2,12 @@ import { useEffect, useState } from 'react';
 import { Button } from './ui/button';
 import { useDispatch, useSelector } from 'react-redux';
 import type { RootState } from '@/redux/store';
-import { addToCart } from '@/redux/cart-slice';
+// import { addToCart } from '@/redux/cart-slice';
+import {
+  addToCart,
+  incrementQuantity,
+  decrementQuantity,
+} from '@/redux/cart-slice';
 
 interface AddCartProps {
   menuId: number;
@@ -12,25 +17,46 @@ export default function AddCart({ menuId }: AddCartProps) {
   const [quantity, setQuantity] = useState(0);
   const dispatch = useDispatch();
   const userId = useSelector((state: RootState) => state.auth.user?.id);
-  const isicard = useSelector((state: RootState) => state.cart);
+  const cartItem = useSelector((state: RootState) =>
+    state.cart.items.find((item) => item.menuId === menuId)
+  );
+  // const cartAll = useSelector((state: RootState) => state.cart);
 
-  const handleAddClick = () => setQuantity(1);
-  const handleIncrement = () => setQuantity((prev) => prev + 1);
-  const handleDecrement = () => {
-    if (quantity === 1) {
-      setQuantity(0); // kembali ke tombol Add
+  // Mengatur quantity dari state Redux saat komponen di-load atau menuId berubah
+  useEffect(() => {
+    if (cartItem) {
+      setQuantity(cartItem.quantity);
     } else {
-      setQuantity((prev) => prev - 1);
+      setQuantity(0);
+    }
+  }, [cartItem]); // Perhatikan dependency array-nya!
+
+  // Fungsi untuk menangani penambahan item saat tombol 'Add' diklik
+  const handleAddClick = () => {
+    if (userId !== undefined) {
+      dispatch(addToCart({ userId, menuId, quantity: 1 }));
     }
   };
 
-  useEffect(() => {
-    console.log({ menuId, quantity });
+  // Fungsi untuk menambah jumlah item yang sudah ada di keranjang
+  const handleIncrement = () => {
     if (userId !== undefined) {
-      dispatch(addToCart({ userId, menuId, quantity: quantity + 1 }));
+      dispatch(incrementQuantity({ userId, menuId }));
     }
-    console.log({ isicard });
-  }, [quantity]);
+  };
+
+  // Fungsi untuk mengurangi jumlah item
+  const handleDecrement = () => {
+    if (userId !== undefined) {
+      dispatch(decrementQuantity({ userId, menuId }));
+    }
+  };
+
+  // Debugging console logs
+  // Anda bisa menghapus ini di production
+  useEffect(() => {
+    // console.log({ menuId, quantity, cartAll });
+  }, [menuId, quantity]);
 
   return (
     <div className='flex items-center space-x-2'>

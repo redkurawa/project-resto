@@ -7,9 +7,7 @@ import {
   createAsyncThunk,
   type PayloadAction,
 } from '@reduxjs/toolkit';
-// import axios from 'axios';
 
-// Definisikan state awal dengan tipe `AuthState`
 const initialState: AuthState = {
   user: null,
   token: null,
@@ -17,31 +15,24 @@ const initialState: AuthState = {
   error: null,
 };
 
-// Buat async thunk untuk login dengan tipe yang kuat
 export const loginUser = createAsyncThunk<
-  LoginPayload, // Tipe data yang akan dikembalikan dari fulfilled action
-  LoginRequest, // Tipe data yang akan diterima sebagai argumen
-  { rejectValue: any } // Tipe untuk error yang ditolak
+  LoginPayload,
+  LoginRequest,
+  { rejectValue: any }
 >('auth/login', async (userData: LoginRequest, { rejectWithValue }) => {
   try {
-    // const response = await axios.post(
-    //   'https://foody-api-xi.vercel.app/api/auth/login',
-    //   userData
-    // );
     const r = await PostService('auth/login', userData);
-    console.log(r.data.data);
+    // console.log(r.data.data);
     return r.data.data;
   } catch (error: any) {
     return rejectWithValue(error.response.data);
   }
 });
 
-// Buat slice otentikasi
 const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    // Action untuk logout, tidak perlu payload
     logout: (state) => {
       state.user = null;
       state.token = null;

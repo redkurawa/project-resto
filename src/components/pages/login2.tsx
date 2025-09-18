@@ -13,7 +13,6 @@ export const Login2 = () => {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [password, setPasswd] = useState('');
-  // const [status, setStatus] = useState<string | null>(null);
   const navigate = useNavigate();
 
   const { user, isLoading, error, token } = useAppSelector(
@@ -28,7 +27,6 @@ export const Login2 = () => {
   };
 
   useEffect(() => {
-    // console.log('user:', user); // Tambahkan ini
     if (user) {
       navigate('/');
     }
@@ -89,13 +87,6 @@ export const Login2 = () => {
                     'Login'
                   )}
                 </Button>
-                {/* {status && <p>{status}</p>} */}
-                {/* {status === 'Login failed' && (
-                <p className='text-red-500'>Email atau password salah</p>
-              )} */}
-                {/* {status?.startsWith('Login failed') && (
-                <p className='text-red-500'>Gagal login: {status}</p>
-              )} */}
               </form>
             </TabsContent>
             <TabsContent value='signUp'>
@@ -159,7 +150,6 @@ export const Login2 = () => {
               </div>
             )}
           </Tabs>
-          {/* {isLoading && <p>Loading...</p>} */}
           {error && <p>Error: {error.message}</p>}
         </div>
       </div>

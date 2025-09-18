@@ -3,6 +3,7 @@ import { GetService } from '@/services/service';
 import type { RestaurantData } from '@/types/review';
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
+import { StarRated } from './star-rating';
 
 interface RestoReviewProps {
   id?: string;
@@ -70,7 +71,10 @@ const RestoReview: React.FC<RestoReviewProps> = ({ id }) => {
               <div className='text-[16px] font-normal'>
                 {dayjs(review.createdAt).format('DD MMMM YYYY, HH:mm')}
               </div>
-              <div className='mt-8 mb-2'>({review.star} stars)</div>
+              {/* <div className='mt-8 mb-2'>({review.star} stars)</div> */}
+              <div className='mt-8 mb-2 flex'>
+                <StarRated star={review.star} />{' '}
+              </div>
               <div className='text-[16px] font-normal'>{review.comment}</div>
             </div>
           ))}

@@ -51,6 +51,7 @@ export const selectCartWithDetails = createSelector(
           userName: user.name,
           menuId: menu?.id ?? '',
           menuName: menu?.foodName ?? '',
+          menuImg: menu?.image,
           price: menu?.price ?? 0,
           quantity: item.quantity,
           total: (menu?.price ?? 0) * item.quantity,

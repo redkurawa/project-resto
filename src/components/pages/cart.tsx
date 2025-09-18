@@ -1,9 +1,8 @@
 import { selectCartWithDetails } from '@/redux/cart-selectors';
 import { useSelector } from 'react-redux';
 import { Header } from '../resto-header';
-import AddCart from '../menu-add-cart2';
+import AddCart from '../menu-add-cart';
 import { formatRupiah } from '@/utils/format-rp';
-// import { selectCartWithDetails } from '../redux/cartSelectors';
 
 const getTotal = (items: { price: number; quantity: number }[]) => {
   return items.reduce((total, item) => total + item.price * item.quantity, 0);
@@ -11,7 +10,6 @@ const getTotal = (items: { price: number; quantity: number }[]) => {
 
 const CartList = () => {
   const cartDetails = useSelector(selectCartWithDetails);
-  // const cartdet = useSelector(selectCartWithDetails);
   const totalHarga = getTotal(cartDetails);
 
   return (
@@ -23,10 +21,18 @@ const CartList = () => {
           <div className='shadow-all rounded-2xl border p-5'>
             {cartDetails.map((item, i) => (
               <div key={i} className='flex-between mb-5'>
-                <div className='flex-1'>
-                  <p>{item.menuName}</p>
-                  <p>{formatRupiah(item.price)}</p>
-                  <p>jumlah : {item.quantity}</p>
+                <div className='flex flex-1 items-center gap-4'>
+                  <div className='shadow-all size-20 overflow-hidden rounded-xl'>
+                    <img
+                      src={item.menuImg}
+                      alt={item.menuName}
+                      className='h-full w-full object-cover'
+                    />
+                  </div>
+                  <div>
+                    <p>{item.menuName}</p>
+                    <p>{formatRupiah(item.price)}</p>
+                  </div>
                 </div>
                 <div className='flex flex-1 justify-end'>
                   <AddCart menuId={Number(item.menuId)} />
