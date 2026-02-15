@@ -1,70 +1,201 @@
-# React + TypeScript + Vite
+# Project Resto
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive food ordering web application built with React, TypeScript, and Vite. This application provides users with an intuitive interface to browse restaurants, view menus, and manage their food orders.
 
-Currently, two official plugins are available:
+## 📋 Description
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Project Resto is a comprehensive food delivery platform that offers:
 
-## Expanding the ESLint configuration
+- **Restaurant Discovery**: Browse through various restaurants with detailed information
+- **Menu Management**: View detailed menus with pricing and descriptions
+- **User Authentication**: Secure login system for personalized experiences
+- **Shopping Cart**: Add/remove items and manage orders before checkout
+- **Responsive Design**: Optimized for desktop, tablet, and mobile devices
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🛠️ Tech Stack
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Frontend
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+- **React 19** - Modern UI library
+- **TypeScript** - Type-safe JavaScript
+- **Vite** - Fast build tool and dev server
+- **Tailwind CSS** - Utility-first CSS framework
+- **React Router** - Client-side routing
+- **React Redux** - State management
+- **React Hook Form** - Form handling and validation
+- **Axios** - HTTP client for API requests
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Development Tools
+
+- **ESLint** - Code linting
+- **Prettier** - Code formatting
+- **TypeScript ESLint** - TypeScript-aware linting
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+- Node.js (version 18 or higher)
+- npm or yarn package manager
+
+### Installation
+
+1. **Clone the repository**
+
+   ```bash
+   git clone https://github.com/redkurawa/project-resto.git
+   cd project-resto
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   npm install
+   ```
+
+3. **Set up environment variables**
+   Create a `.env` file in the root directory:
+
+   ```
+   VITE_BASE_API_URL=https://foody-api-xi.vercel.app/api/
+   ```
+
+4. **Start the development server**
+
+   ```bash
+   npm run dev
+   ```
+
+5. **Open your browser**
+   Navigate to `http://localhost:5173` to view the application.
+
+## 📦 Building for Production
+
+To build the application for production:
+
+```bash
+npm run build
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+This will create an optimized build in the `dist` directory.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🌐 Deployment
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Vercel (Recommended)
+
+1. Install Vercel CLI:
+
+   ```bash
+   npm install -g vercel
+   ```
+
+2. Deploy to Vercel:
+   ```bash
+   vercel
+   ```
+
+### Netlify
+
+1. Build the project:
+
+   ```bash
+   npm run build
+   ```
+
+2. Drag and drop the `dist` folder to Netlify's deployment dashboard, or connect your GitHub repository.
+
+### GitHub Pages
+
+1. Build the project:
+
+   ```bash
+   npm run build
+   ```
+
+2. Configure your repository settings to serve from the `dist` folder.
+
+## 🎮 Usage
+
+### User Authentication
+
+1. Navigate to the login page
+2. Enter your credentials
+3. Access personalized features like order history and saved items
+
+### Browsing Restaurants
+
+1. View the homepage to see available restaurants
+2. Use navigation filters to find specific cuisines or categories
+3. Click on a restaurant to view its details and menu
+
+### Managing Orders
+
+1. Browse restaurant menus
+2. Add items to your cart
+3. View and modify your cart
+4. Proceed to checkout (when available)
+
+### Navigation
+
+The application features a comprehensive navigation system with:
+
+- Restaurant categories (All, Best Seller, Delivery, etc.)
+- User profile dropdown
+- Shopping cart access
+
+## 📁 Project Structure
+
 ```
-# project-resto
+src/
+├── components/          # Reusable UI components
+│   ├── pages/          # Page components
+│   │   ├── home2.tsx   # Homepage
+│   │   ├── login2.tsx  # Login page
+│   │   ├── detail2.tsx # Restaurant detail page
+│   │   └── cart.tsx    # Shopping cart
+│   └── ui/             # UI component library
+├── services/           # API services and utilities
+├── redux/             # State management
+├── types/             # TypeScript type definitions
+└── utils/             # Utility functions
+```
+
+## 🔧 Configuration
+
+### Environment Variables
+
+- `VITE_BASE_API_URL`: The base URL for the API endpoints
+
+### Build Configuration
+
+- **TypeScript**: Configured in `tsconfig.json` and `tsconfig.app.json`
+- **Vite**: Build settings in `vite.config.ts`
+- **Tailwind**: Configuration in `tailwind.config.ts`
+- **ESLint**: Linting rules in `eslint.config.js`
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🙏 Acknowledgments
+
+- Built with React and TypeScript
+- Styled with Tailwind CSS
+- State management with Redux Toolkit
+- API integration with Axios
+
+## 📞 Support
+
+For support, email support@projectresto.com or create an issue on the GitHub repository.
+
+---
+
+**Project Resto** - Making food ordering simple and enjoyable! 🍔🍕🍣
