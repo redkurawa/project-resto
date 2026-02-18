@@ -94,6 +94,16 @@ This will create an optimized build in the `dist` directory.
    vercel
    ```
 
+### Feature Page
+
+A standalone feature page is available at `/feature` on Vercel. This page includes:
+
+- Stone theme shadcn design
+- Interactive buttons linked to the main app
+- Responsive layout with hero, features grid, and footer
+
+Access: `https://your-project.vercel.app/feature`
+
 ### Netlify
 
 1. Build the project:
